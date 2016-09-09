@@ -2,17 +2,52 @@ package com.tfnico.examples.guava;
 
 import static org.junit.Assert.assertEquals;
 
+import java.awt.Color;
 import java.util.HashSet;
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.google.common.collect.Constraints;
+import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Sets;
 
 public class CollectionTest {
 
+	@Test
+	public void Immutable(){//不可变的集合
+		//不可变集合可以用如下多种方式创建：
+		//Builder工具
+		final ImmutableSet<String> ImmutableSetString =
+				        ImmutableSet.<String>builder()
+				            .add("a")
+				            .add("b")
+				            .add("c")
+				            .build();
+		//所有不可变集合都有一个asList()方法提供ImmutableList视图，
+		System.out.println(ImmutableSetString.asList().get(0));
+		//of方法，如ImmutableSet.of(“a”, “b”, “c”)或 ImmutableMap.of(“a”, 1, “b”, 2);
+		final ImmutableMap<String, Integer> immutableMap=ImmutableMap.of("a", 1, "b", 2); 
+		System.out.println(immutableMap.get("a"));
+		//copyOf方法，如ImmutableSet.copyOf(set);
+		
+	}
+	
+	public void multiset(){//新集合类型  Multiset
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//--------------------------------------------------------------------------------------------------------------------------
     // Some customers
     Customer bob = new Customer(1, "Bob");
     Customer lisa = new Customer(2, "Lisa");
