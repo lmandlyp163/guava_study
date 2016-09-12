@@ -3,12 +3,15 @@ package com.tfnico.examples.guava;
 import static org.junit.Assert.assertEquals;
 
 import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import org.junit.Test;
 
 import com.google.common.collect.ArrayListMultimap;
 import com.google.common.collect.BiMap;
+import com.google.common.collect.ClassToInstanceMap;
 import com.google.common.collect.Constraints;
 import com.google.common.collect.HashBasedTable;
 import com.google.common.collect.HashBiMap;
@@ -16,8 +19,11 @@ import com.google.common.collect.HashMultimap;
 import com.google.common.collect.HashMultiset;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.ImmutableSet;
+import com.google.common.collect.Lists;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multiset;
+import com.google.common.collect.MutableClassToInstanceMap;
 import com.google.common.collect.Sets;
 import com.google.common.collect.Table;
 
@@ -119,14 +125,36 @@ public class CollectionTest {
 		weightedGraph.put(2, 1, 21);
 		weightedGraph.put(2, 2, 22);
 		weightedGraph.put(2, 3, 23);
-		System.out.println(weightedGraph.row(1));; // 用Map<C, V>返回给定”行”的所有列
-		System.out.println(weightedGraph.row(2));; // 用Map<C, V>返回给定”行”的所有列
-//		weightedGraph.column(v3); // returns a Map mapping v1 to 20, v2 to 5
+		System.out.println(weightedGraph.row(1));; // 用Map<C, V>返回给定”行”的所有列 {1=11, 2=12, 3=13}
+		System.out.println(weightedGraph.row(2));; // 用Map<C, V>返回给定”行”的所有列 {1=21, 2=22, 3=23}
+		System.out.println(weightedGraph.row(2).get(1));; // 用Map<C, V>返回给定”行”的所有列 21
+		System.out.println(weightedGraph.column(1));; //返回指定的列  {1=11, 2=21}
+		System.out.println(weightedGraph.column(2));; // 返回指定的列  {1=12, 2=22}
+		
+		System.out.println(weightedGraph.rowMap());; // 返回Map<R, Map<C, V>>  {1={1=11, 2=12, 3=13}, 2={1=21, 2=22, 3=23}}
+		System.out.println(weightedGraph.rowKeySet());; // 返回”行”的集合Set<R>。  [1, 2]
 
+		ClassToInstanceMap<Number> numberDefaults=MutableClassToInstanceMap.create();//HashMap<Class<? extends B>, B>()
+		numberDefaults.put(Integer.class, Integer.valueOf(0));
 	}
 	
 	
-	
+	@Test
+	public void collections(){
+		//静态工厂方法
+		List<String> list = Lists.newArrayList();
+		Map<String, String> map = Maps.newLinkedHashMap();
+		Map<String, String> map2 = Maps.newHashMap();
+		Set<String> set=Sets.newHashSet();
+		
+		Set<String> copySet = Sets.newHashSet("alpha", "beta", "gamma");
+		List<String> theseElements = Lists.newArrayList("alpha", "beta", "gamma");
+		//集合初始化大小
+		List<String> exactly100 = Lists.newArrayListWithCapacity(100);
+		List<String> approx100 = Lists.newArrayListWithExpectedSize(100);
+		Set<String> approx100Set = Sets.newHashSetWithExpectedSize(100);
+
+	}
 	
 	
 	
